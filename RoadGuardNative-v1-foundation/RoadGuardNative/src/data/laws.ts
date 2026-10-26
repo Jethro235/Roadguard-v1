@@ -1,0 +1,51 @@
+import { Law } from '../types';
+
+export const LAWS: Law[] = [
+  {
+    id: 'speeding',
+    title: 'Excessive Speeding / Reckless Driving',
+    summary: 'Serious speeding or reckless driving offence.',
+    fine: '₦100,000',
+    action: 'Mobile Court prosecution',
+    vehicle: ['car', 'motorcycle', 'bus'],
+    source: 'Lagos State traffic-law reference supplied for RoadGuard',
+    effectiveDate: 'Reference dataset — verify before publication',
+  },
+  {
+    id: 'uturn',
+    title: 'Illegal U-Turns',
+    summary: 'Illegal U-turn offence.',
+    fine: '₦20,000 first offence; ₦30,000 subsequent',
+    action: 'Driver training',
+    vehicle: ['car', 'motorcycle', 'bus'],
+    source: 'Lagos State traffic-law reference supplied for RoadGuard',
+    effectiveDate: 'Reference dataset — verify before publication',
+  },
+  {
+    id: 'overtaking',
+    title: 'Wrongful Overtaking',
+    summary: 'Improper or unsafe overtaking offence.',
+    fine: '₦100,000',
+    vehicle: ['car', 'motorcycle', 'bus'],
+    source: 'Lagos State traffic-law reference supplied for RoadGuard',
+    effectiveDate: 'Reference dataset — verify before publication',
+  },
+  {
+    id: 'tow-car',
+    title: 'Towing Fees — Cars / Jeeps',
+    summary: 'Base towing charge plus daily storage.',
+    fine: '₦10,000 base + ₦1,000/day storage',
+    vehicle: ['car'],
+    source: 'Lagos State traffic-law reference supplied for RoadGuard',
+    effectiveDate: 'Reference dataset — verify before publication',
+  },
+  {
+    id: 'tow-loaded-trailer',
+    title: 'Towing Fees — Loaded Trailers',
+    summary: 'Base towing charge plus daily storage.',
+    fine: '₦100,000 base + ₦2,000/day storage',
+    vehicle: ['bus'],
+    source: 'Lagos State traffic-law reference supplied for RoadGuard',
+    effectiveDate: 'Reference dataset — verify before publication',
+  },
+];

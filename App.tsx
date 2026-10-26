@@ -1,45 +1,59 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppErrorBoundary } from './src/components/AppErrorBoundary';
+import RoadGuardApp from './src/RoadGuardApp';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+function renderAppError(error: Error, retry: () => void) {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
+    <View style={styles.errorScreen}>
+      <Text style={styles.errorTitle}>RoadGuard could not start</Text>
+      <Text style={styles.errorMessage}>
+        {error.message || 'An unexpected rendering error occurred.'}
+      </Text>
+      <Pressable accessibilityRole="button" onPress={retry} style={styles.retry}>
+        <Text style={styles.retryText}>Try again</Text>
+      </Pressable>
     </View>
   );
 }
 
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <StatusBar barStyle="light-content" />
+      <AppErrorBoundary fallback={renderAppError}>
+        <RoadGuardApp />
+      </AppErrorBoundary>
+    </SafeAreaProvider>
+  );
+}
+
 const styles = StyleSheet.create({
-  container: {
+  errorScreen: {
     flex: 1,
+    justifyContent: 'center',
+    padding: 24,
+    backgroundColor: '#071019',
+  },
+  errorTitle: {
+    color: '#f4f8fb',
+    fontSize: 22,
+    fontWeight: '800',
+    marginBottom: 10,
+  },
+  errorMessage: {
+    color: '#ffb5b5',
+    fontSize: 14,
+    lineHeight: 21,
+  },
+  retry: {
+    alignSelf: 'flex-start',
+    paddingVertical: 8,
+    marginTop: 12,
+  },
+  retryText: {
+    color: '#6fe0b1',
+    fontWeight: '800',
   },
 });
-
-export default App;

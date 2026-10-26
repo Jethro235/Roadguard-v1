@@ -1,4 +1,55 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# RoadGuard
+
+RoadGuard is a React Native CLI Android app with vehicle selection, live GPS
+zone warnings, checkpoint reporting, voice alerts, road-law references, and
+motorist-rights guidance. The map needs a valid Android Google Maps API key;
+the rest of the app remains usable if maps or location are unavailable.
+
+Use Node.js 22.11 or later and Java 17. Start Metro with `npm start`, then run
+`npm run android` from a second terminal. Grant location permission to enable
+live warnings and checkpoint reporting; without it the app stays in demo mode.
+
+The remaining setup and troubleshooting instructions below follow the
+React Native CLI workflow.
+
+# RoadGuard MVP behavior
+
+First launch asks for a vehicle. Select **Settings** to change the warning
+distance, voice alerts, GPS, optional API URL, or Android background monitoring.
+Seeded map areas are illustrative demo coordinates, not official locations.
+Law references are unverified placeholders and do not include fine amounts.
+Community reports are temporary user reports, never official information.
+
+## RoadGuard API and Neon setup
+
+The optional API lives in `server/` and is separate from the React Native
+dependency graph. It needs Node.js 22.11+, PostgreSQL access through Neon, and
+an administrator-provided token. No credentials are committed.
+
+1. Create a Neon database and keep its connection string private.
+2. Copy `server/.env.example` to `server/.env`, then fill in `DATABASE_URL`
+   and a random `ADMIN_TOKEN` of at least 32 characters locally. Do not commit
+   `server/.env`.
+3. Install the server dependency from `server/` with `npm install`.
+4. Apply `server/migrations/001_initial_schema.sql` to the database using the
+   provider's SQL editor or `psql`.
+5. Start the API with `npm start` from `server/`, or `npm run server` from the
+   project root. The admin review page is at `/admin`; it keeps the token only
+   in the current page memory.
+6. In RoadGuard Settings, set the API base URL to the deployed HTTPS URL. For
+   Android emulator development, `http://10.0.2.2:3000` may be used when the
+   Android build permits local cleartext development traffic.
+
+Without a reachable database, `/health` reports degraded and the app remains
+in demo/offline mode. The API only receives coordinates when the user taps the
+checkpoint report action. It stores no trip history and expires reports after
+two hours. The in-memory rate limiter is suitable for a single-instance MVP;
+use a shared limiter before horizontal scaling.
+
+Run mobile checks with `npm test -- --runInBand`, `npm run lint`, and
+`npx tsc --noEmit`. Run API validation tests with `npm run test:server`.
+Background location is an Android foreground service with an ongoing
+notification; permission policy and behavior still require real-device QA.
 
 # Getting Started
 

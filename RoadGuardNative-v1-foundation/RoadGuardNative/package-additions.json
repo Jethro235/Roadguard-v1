@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "latest",
+    "@react-native-community/geolocation": "latest",
+    "react-native-maps": "latest",
+    "react-native-tts": "latest"
+  }
+}

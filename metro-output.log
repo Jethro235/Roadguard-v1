@@ -1,0 +1,72 @@
+
+Welcome to React Native v0.87
+Starting dev server on http://localhost:8081
+
+
+                        ▒▒▓▓▓▓▒▒
+                     ▒▓▓▓▒▒░░▒▒▓▓▓▒
+                  ▒▓▓▓▓░░░▒▒▒▒░░░▓▓▓▓▒
+                 ▓▓▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▓
+                 ▓▓░░░░░▒▓▓▓▓▓▓▒░░░░░▓▓
+                 ▓▓░░▓▓▒░░░▒▒░░░▒▓▒░░▓▓
+                 ▓▓░░▓▓▓▓▓▒▒▒▒▓▓▓▓▒░░▓▓
+                 ▓▓░░▓▓▓▓▓▓▓▓▓▓▓▓▓▒░░▓▓
+                 ▓▓▒░░▒▒▓▓▓▓▓▓▓▓▒░░░▒▓▓
+                  ▒▓▓▓▒░░░▒▓▓▒░░░▒▓▓▓▒
+                     ▒▓▓▓▒░░░░▒▓▓▓▒
+                        ▒▒▓▓▓▓▒▒
+
+
+                Welcome to Metro v0.87.1
+              Fast - Scalable - Integrated
+
+
+ INFO  Dev server ready. Press Ctrl+C to exit.
+ INFO  Key commands available:
+
+   r  - reload app(s)
+   d  - open Dev Menu
+   j  - open DevTools
+
+ BUNDLE  ./index.js ░░░░░░░░░░░░░░░░ 0% (0/1)
+ BUNDLE  ./index.js ░░░░░░░░░░░░░░░░ 1% (1/1)
+ BUNDLE  ./index.js ▓▓▓░░░░░░░░░░░░░ 21% (12/44)
+ BUNDLE  ./index.js ▓▓▓░░░░░░░░░░░░░ 21% (35/167)
+ BUNDLE  ./index.js ▓▓▓░░░░░░░░░░░░░ 21% (82/216)
+ BUNDLE  ./index.js ▓▓▓░░░░░░░░░░░░░ 22% (123/262)
+ BUNDLE  ./index.js ▓▓▓▓▓░░░░░░░░░░░ 37% (183/299)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓░░░░░░░░░ 45% (232/344)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓░░░░░░░░░ 45% (243/375)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓░░░░░░░░░ 47% (284/414)
+ WARN  Attempted to import the module "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native\src\private\featureflags\ReactNativeFeatureFlags" which is not listed in the "exports" of "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native" under the requested subpath "./src/private/featureflags/ReactNativeFeatureFlags". Falling back to file-based resolution. Consider updating the call site or asking the package maintainer(s) to expose this API.
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 60% (338/433)
+ WARN  Attempted to import the module "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native\src\private\featureflags\ReactNativeFeatureFlags" which is not listed in the "exports" of "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native" under the requested subpath "./src/private/featureflags/ReactNativeFeatureFlags". Falling back to file-based resolution. Consider updating the call site or asking the package maintainer(s) to expose this API.
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 82% (422/464)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 98% (497/502)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99% (501/502)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99% (502/502)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99% (555/576)
+ BUNDLE  ./index.js 
+ BUNDLE  ./index.js ░░░░░░░░░░░░░░░░ 0% (0/1)
+ WARN  Attempted to import the module "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native\src\private\featureflags\ReactNativeFeatureFlags" which is not listed in the "exports" of "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native" under the requested subpath "./src/private/featureflags/ReactNativeFeatureFlags". Falling back to file-based resolution. Consider updating the call site or asking the package maintainer(s) to expose this API.
+ BUNDLE  ./index.js 
+ BUNDLE  ./index.js ░░░░░░░░░░░░░░░░ 0% (0/1)
+ BUNDLE  ./index.js ▓▓▓░░░░░░░░░░░░░ 19% (17/133)
+ BUNDLE  ./index.js ▓▓▓░░░░░░░░░░░░░ 19% (84/218)
+ BUNDLE  ./index.js ▓▓▓▓▓░░░░░░░░░░░ 32% (176/331)
+ WARN  Attempted to import the module "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native\src\private\featureflags\ReactNativeFeatureFlags" which is not listed in the "exports" of "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native" under the requested subpath "./src/private/featureflags/ReactNativeFeatureFlags". Falling back to file-based resolution. Consider updating the call site or asking the package maintainer(s) to expose this API.
+ BUNDLE  ./index.js ▓▓▓▓▓▓░░░░░░░░░░ 40% (240/392)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓░░░░░░░░░ 49% (303/430)
+ WARN  Attempted to import the module "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native\src\private\featureflags\ReactNativeFeatureFlags" which is not listed in the "exports" of "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native" under the requested subpath "./src/private/featureflags/ReactNativeFeatureFlags". Falling back to file-based resolution. Consider updating the call site or asking the package maintainer(s) to expose this API.
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 67% (383/466)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 72% (418/492)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 76% (452/524)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 83% (503/551)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 87% (567/621)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 91% (650/678)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 95% (668/684)
+ BUNDLE  ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 95% (669/684)
+ BUNDLE  ./index.js 
+ BUNDLE  ./index.js ░░░░░░░░░░░░░░░░ 0% (0/1)
+ WARN  Attempted to import the module "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native\src\private\featureflags\ReactNativeFeatureFlags" which is not listed in the "exports" of "E:\xampp\htdocs\RoadGuard\RoadGuard\node_modules\react-native" under the requested subpath "./src/private/featureflags/ReactNativeFeatureFlags". Falling back to file-based resolution. Consider updating the call site or asking the package maintainer(s) to expose this API.
+ BUNDLE  ./index.js 

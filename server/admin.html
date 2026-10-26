@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoadGuard data review</title>
+  <style>
+    :root { color-scheme: dark; font: 16px system-ui, sans-serif; background: #071019; color: #edf5f7; }
+    body { max-width: 900px; margin: 0 auto; padding: 24px; }
+    h1, h2 { line-height: 1.2; } p, small { color: #a4b5c3; line-height: 1.5; }
+    section { background: #0e1a25; border: 1px solid #243746; border-radius: 14px; padding: 18px; margin: 16px 0; }
+    input, textarea, button { box-sizing: border-box; width: 100%; padding: 12px; border-radius: 9px; border: 1px solid #344b5e; background: #071019; color: #edf5f7; font: inherit; }
+    textarea { min-height: 250px; margin: 10px 0; font: 13px ui-monospace, monospace; }
+    button { width: auto; min-height: 44px; background: #54d7a1; color: #071019; border: 0; font-weight: 800; cursor: pointer; }
+    button.secondary { background: #172a38; color: #b8f2d5; border: 1px solid #315044; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+    #status { min-height: 24px; color: #f1c982; white-space: pre-wrap; }
+    label { display: block; margin: 10px 0 6px; font-weight: 700; }
+    .warning { border-left: 4px solid #e6a843; padding-left: 12px; }
+  </style>
+</head>
+<body>
+  <h1>RoadGuard data review</h1>
+  <p class="warning">Only publish laws with an authoritative HTTPS source and completed human review. Published zones must be verified official locations. Community reports are never official.</p>
+  <section>
+    <h2>Admin access</h2>
+    <label for="token">Server admin token</label>
+    <input id="token" type="password" autocomplete="off" placeholder="Entered for this page session only">
+    <div class="buttons" style="margin-top:10px"><button class="secondary" id="load">Load records</button></div>
+  </section>
+  <section>
+    <h2>Laws and fines</h2>
+    <p>Each save creates a version snapshot. Use reviewStatus draft, pending-review, or published. Publication requires reviewedBy and reviewedAt.</p>
+    <label for="lawId">Record ID</label><input id="lawId" placeholder="speed-limits">
+    <label for="lawJson">Editable law JSON</label>
+    <textarea id="lawJson" spellcheck="false">{
+  "id": "speed-limits",
+  "title": "",
+  "summary": "",
+  "fineText": "",
+  "actionText": "",
+  "vehicleTypes": ["car", "motorcycle", "bus"],
+  "sourceName": "",
+  "sourceUrl": "https://",
+  "effectiveDate": "YYYY-MM-DD",
+  "reviewStatus": "draft",
+  "reviewedBy": "",
+  "reviewedAt": ""
+}</textarea>
+    <div class="buttons"><button id="saveLaw">Save law version</button><button class="secondary" id="useLaw">Load selected law</button><button class="secondary" id="lawHistory">Show version history</button></div>
+    <pre id="history" aria-live="polite"></pre>
+  </section>
+  <section>
+    <h2>Official zones</h2>
+    <p>Provide official provenance and an HTTPS source. Published records are the only zones returned to the mobile app.</p>
+    <label for="zoneId">Record ID</label><input id="zoneId" placeholder="area-id">
+    <label for="zoneJson">Editable zone JSON</label>
+    <textarea id="zoneJson" spellcheck="false">{
+  "id": "area-id",
+  "name": "",
+  "latitude": 0,
+  "longitude": 0,
+  "warningRadiusMeters": 500,
+  "vehicleTypes": ["car", "motorcycle", "bus"],
+  "provenance": "",
+  "sourceUrl": "https://",
+  "publicationStatus": "draft",
+  "verifiedBy": "",
+  "verifiedAt": ""
+}</textarea>
+    <div class="buttons"><button id="saveZone">Save zone</button><button class="secondary" id="useZone">Load selected zone</button></div>
+  </section>
+  <p id="status" role="status" aria-live="polite"></p>
+  <script>
+    const token = document.getElementById('token');
+    const status = document.getElementById('status');
+    const lawId = document.getElementById('lawId');
+    const zoneId = document.getElementById('zoneId');
+    let laws = [];
+    let zones = [];
+    async function api(path, options = {}) {
+      const response = await fetch(path, {
+        ...options,
+        headers: { Authorization: `Bearer ${token.value}`, 'Content-Type': 'application/json', ...options.headers },
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error?.message || `HTTP ${response.status}`);
+      return data;
+    }
+    document.getElementById('load').onclick = async () => {
+      try {
+        const [lawData, zoneData] = await Promise.all([api('/admin/v1/laws'), api('/admin/v1/zones')]);
+        laws = lawData.laws; zones = zoneData.zones;
+        status.textContent = `Loaded ${laws.length} laws and ${zones.length} zones.`;
+      } catch (error) { status.textContent = error.message; }
+    };
+    document.getElementById('useLaw').onclick = () => {
+      const item = laws.find((row) => row.id === lawId.value.trim());
+      if (!item) { status.textContent = 'Load records, then enter an existing law ID.'; return; }
+      document.getElementById('lawJson').value = JSON.stringify(item, null, 2);
+    };
+    document.getElementById('lawHistory').onclick = async () => {
+      try {
+        const data = await api(`/admin/v1/laws/${encodeURIComponent(lawId.value.trim())}/versions`);
+        document.getElementById('history').textContent = JSON.stringify(data.versions, null, 2);
+      } catch (error) { status.textContent = error.message; }
+    };
+    document.getElementById('useZone').onclick = () => {
+      const item = zones.find((row) => row.id === zoneId.value.trim());
+      if (!item) { status.textContent = 'Load records, then enter an existing zone ID.'; return; }
+      document.getElementById('zoneJson').value = JSON.stringify(item, null, 2);
+    };
+    document.getElementById('saveLaw').onclick = async () => {
+      try {
+        const body = JSON.parse(document.getElementById('lawJson').value);
+        const data = await api('/admin/v1/laws', { method: 'PUT', body: JSON.stringify(body) });
+        lawId.value = data.law.id; status.textContent = `Saved law ${data.law.id}, version ${data.law.version}, status ${data.law.reviewStatus}.`;
+      } catch (error) { status.textContent = error.message; }
+    };
+    document.getElementById('saveZone').onclick = async () => {
+      try {
+        const body = JSON.parse(document.getElementById('zoneJson').value);
+        const data = await api('/admin/v1/zones', { method: 'PUT', body: JSON.stringify(body) });
+        zoneId.value = data.zone.id; status.textContent = `Saved zone ${data.zone.id}, status ${data.zone.publicationStatus}.`;
+      } catch (error) { status.textContent = error.message; }
+    };
+  </script>
+</body>
+</html>
